@@ -1,8 +1,7 @@
+library mapbox_gl_js_flutter_plugin;
 
-import 'mapbox_gl_js_flutter_plugin_platform_interface.dart';
-
-class MapboxGlJsFlutterPlugin {
-  Future<String?> getPlatformVersion() {
-    return MapboxGlJsFlutterPluginPlatform.instance.getPlatformVersion();
-  }
+/// A Calculator.
+class Calculator {
+  /// Returns [value] plus 1.
+  int addOne(int value) => value + 1;
 }
