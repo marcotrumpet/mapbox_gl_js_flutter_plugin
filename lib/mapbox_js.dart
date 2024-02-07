@@ -29,10 +29,19 @@ class Map {
   external core.dynamic getSource(core.String id);
 
   @JS()
-  external void addLayer(core.dynamic layer);
+  external core.dynamic removeSource(core.String id);
+
+  @JS()
+  external void addLayer(JsObject layer);
 
   @JS()
   external core.dynamic getLayer(core.String id);
+
+  @JS()
+  external void moveLayer(core.String layerId);
+
+  @JS()
+  external void removeLayer(core.String layerId);
 
   @JS()
   external core.dynamic on(
@@ -51,9 +60,6 @@ class Map {
 
   @JS()
   external core.bool loaded();
-
-  @JS()
-  external void moveLayer(core.String layerId);
 
   @JS()
   external void setLayoutProperty(

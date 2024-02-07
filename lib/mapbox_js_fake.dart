@@ -10,9 +10,15 @@ class Map {
 
   external core.dynamic getSource(core.String id);
 
+  external core.dynamic removeSource(core.String id);
+
   external void addLayer(core.dynamic layer);
 
   external core.dynamic getLayer(core.String id);
+
+  external void moveLayer(core.String layerId);
+
+  external void removeLayer(core.String layerId);
 
   external core.dynamic on(
     core.String method,
@@ -26,8 +32,6 @@ class Map {
   external void setCenter(core.List<core.num> coords);
 
   external core.bool loaded();
-
-  external void moveLayer(core.String layerId);
 
   external void setLayoutProperty(
     core.String layerId,
