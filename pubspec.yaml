@@ -1,11 +1,10 @@
 name: mapbox_gl_js_flutter_plugin
-description: "A new Flutter plugin project."
+description: "This is a Flutter plugin to let you use mapbox gl in a Flutter web app with js interop"
 version: 0.0.1
-homepage:
 
 environment:
-  sdk: '>=3.2.5 <4.0.0'
-  flutter: '>=3.3.0'
+  sdk: ">=3.2.5 <4.0.0"
+  flutter: ">=3.3.0"
 
 dependencies:
   flutter:
