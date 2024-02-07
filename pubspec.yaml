@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  js: ^0.6.7
+  very_good_analysis: ^5.1.0
 
 dev_dependencies:
   flutter_test:
