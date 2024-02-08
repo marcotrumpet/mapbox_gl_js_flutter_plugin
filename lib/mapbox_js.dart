@@ -8,12 +8,13 @@ import 'dart:js';
 import 'dart:js_util' as js_util;
 
 import 'package:js/js.dart';
+import 'package:js/js_util.dart';
 
 @JS('JSON.stringify')
 external core.String stringify(core.dynamic obj);
 
 @JS('console.log')
-external core.String consoleLog(core.dynamic obj);
+external void consoleLog(core.dynamic obj);
 
 @JS('mapboxgl')
 external Map get map;
@@ -79,6 +80,14 @@ class Map {
 
   @JS()
   external core.num getZoom();
+
+  @JS()
+  external core.dynamic queryRenderedFeatures(
+    core.List<core.num> coords,
+  );
+
+  @JS()
+  external void easeTo(JsObject options);
 }
 
 @JS()
@@ -106,4 +115,8 @@ extension MapToJSObject on core.Map<core.dynamic, core.dynamic> {
     });
     return object;
   }
+}
+
+core.Object? myDartify(core.dynamic obj) {
+  return dartify(obj);
 }

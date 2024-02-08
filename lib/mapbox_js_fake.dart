@@ -1,7 +1,7 @@
 import 'dart:core' as core;
 
 core.String stringify(core.dynamic obj) => throw core.UnimplementedError();
-core.String consoleLog(core.dynamic obj) => throw core.UnimplementedError();
+void consoleLog(core.dynamic obj) => throw core.UnimplementedError();
 
 class Map {
   external Map(options);
@@ -47,6 +47,10 @@ class Map {
   external void zoomTo(core.num zoom);
 
   external core.num getZoom();
+
+  external core.dynamic queryRenderedFeatures(core.List<core.num> coords);
+
+  external void easeTo(core.dynamic options);
 }
 
 class MapOptions {
@@ -63,3 +67,5 @@ class MapOptions {
 extension MapToJSObject on core.Map<core.dynamic, core.dynamic> {
   core.dynamic mapToJsObject() => throw core.UnimplementedError();
 }
+
+core.Object? myDartify(core.dynamic obj) => throw core.UnimplementedError();
