@@ -88,6 +88,18 @@ class Map {
 
   @JS()
   external void easeTo(JsObject options);
+
+  @JS()
+  external void flyTo(JsObject options);
+
+  @JS()
+  external JsObject cameraForBounds(
+    core.List<core.List<core.num>> bbox,
+    JsObject options,
+  );
+
+  @JS()
+  external void addControl(GeolocateControl conrtol);
 }
 
 @JS()
@@ -101,6 +113,20 @@ class MapOptions {
     core.String style,
     core.String language,
   });
+}
+
+@JS('mapboxgl.GeolocateControl')
+class GeolocateControl {
+  external factory GeolocateControl();
+
+  @JS()
+  external core.dynamic Function(core.dynamic map) onAdd;
+
+  @JS()
+  external void Function() onRemove;
+
+  @JS()
+  external core.bool Function() trigger;
 }
 
 extension MapToJSObject on core.Map<core.dynamic, core.dynamic> {

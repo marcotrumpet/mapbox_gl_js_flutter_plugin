@@ -51,6 +51,15 @@ class Map {
   external core.dynamic queryRenderedFeatures(core.List<core.num> coords);
 
   external void easeTo(core.dynamic options);
+
+  external void flyTo(core.dynamic options);
+
+  external core.dynamic cameraForBounds(
+    core.List<core.List<core.num>> bbox,
+    core.dynamic options,
+  );
+
+  external void addControl(GeolocateControl conrtol);
 }
 
 class MapOptions {
@@ -62,6 +71,14 @@ class MapOptions {
     core.String style,
     core.String language,
   });
+}
+
+class GeolocateControl {
+  external factory GeolocateControl();
+
+  external core.dynamic Function(core.dynamic map) onAdd;
+  external void Function() onRemove;
+  external core.bool Function() trigger;
 }
 
 extension MapToJSObject on core.Map<core.dynamic, core.dynamic> {
