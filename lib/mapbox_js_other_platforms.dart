@@ -29,6 +29,8 @@ class MapboxJS {
 
   external void setCenter(List<num> coords);
 
+  external LngLatBounds getBounds();
+
   external bool loaded();
 
   external void setLayoutProperty(
@@ -58,6 +60,11 @@ class MapboxJS {
   );
 
   external void addControl(GeolocateControl conrtol);
+}
+
+class LngLatBounds {
+  external dynamic getNorthEast();
+  external dynamic getSouthWest();
 }
 
 class MapOptions {

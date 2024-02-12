@@ -59,6 +59,9 @@ class MapboxJS {
   external void setCenter(List<num> coords);
 
   @JS()
+  external LngLatBounds getBounds();
+
+  @JS()
   external bool loaded();
 
   @JS()
@@ -99,6 +102,16 @@ class MapboxJS {
 
   @JS()
   external void addControl(GeolocateControl conrtol);
+}
+
+@JS()
+@anonymous
+class LngLatBounds {
+  @JS()
+  external dynamic getNorthEast();
+
+  @JS()
+  external dynamic getSouthWest();
 }
 
 @JS()
