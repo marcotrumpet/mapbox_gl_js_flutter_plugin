@@ -1,62 +1,60 @@
-import 'dart:core' as core;
+String stringify(dynamic obj) => throw UnimplementedError();
+void consoleLog(dynamic obj) => throw UnimplementedError();
 
-core.String stringify(core.dynamic obj) => throw core.UnimplementedError();
-void consoleLog(core.dynamic obj) => throw core.UnimplementedError();
+class MapboxJS {
+  external MapboxJS(options);
 
-class Map {
-  external Map(options);
+  external void addSource(String id, dynamic options);
 
-  external void addSource(core.String id, core.dynamic options);
+  external dynamic getSource(String id);
 
-  external core.dynamic getSource(core.String id);
+  external dynamic removeSource(String id);
 
-  external core.dynamic removeSource(core.String id);
+  external void addLayer(dynamic layer);
 
-  external void addLayer(core.dynamic layer);
+  external dynamic getLayer(String id);
 
-  external core.dynamic getLayer(core.String id);
+  external void moveLayer(String layerId);
 
-  external void moveLayer(core.String layerId);
+  external void removeLayer(String layerId);
 
-  external void removeLayer(core.String layerId);
-
-  external core.dynamic on(
-    core.String method,
-    core.dynamic Function(core.dynamic) callback,
+  external dynamic on(
+    String method,
+    dynamic Function(dynamic) callback,
   );
 
-  external core.dynamic setData(core.dynamic options);
+  external dynamic setData(dynamic options);
 
   external void triggerRepaint();
 
-  external void setCenter(core.List<core.num> coords);
+  external void setCenter(List<num> coords);
 
-  external core.bool loaded();
+  external bool loaded();
 
   external void setLayoutProperty(
-    core.String layerId,
-    core.String property,
-    core.dynamic value,
+    String layerId,
+    String property,
+    dynamic value,
   );
 
-  external core.dynamic getPaintProperty(
-    core.String layerId,
-    core.String property,
+  external dynamic getPaintProperty(
+    String layerId,
+    String property,
   );
 
-  external void zoomTo(core.num zoom);
+  external void zoomTo(num zoom);
 
-  external core.num getZoom();
+  external num getZoom();
 
-  external core.dynamic queryRenderedFeatures(core.List<core.num> coords);
+  external dynamic queryRenderedFeatures(List<num> coords);
 
-  external void easeTo(core.dynamic options);
+  external void easeTo(dynamic options);
 
-  external void flyTo(core.dynamic options);
+  external void flyTo(dynamic options);
 
-  external core.dynamic cameraForBounds(
-    core.List<core.List<core.num>> bbox,
-    core.dynamic options,
+  external dynamic cameraForBounds(
+    List<List<num>> bbox,
+    dynamic options,
   );
 
   external void addControl(GeolocateControl conrtol);
@@ -64,25 +62,25 @@ class Map {
 
 class MapOptions {
   external factory MapOptions({
-    core.String container,
-    core.String accessToken,
-    core.List<core.num> center,
-    core.num zoom,
-    core.String style,
-    core.String language,
+    String container,
+    String accessToken,
+    List<num> center,
+    num zoom,
+    String style,
+    String language,
   });
 }
 
 class GeolocateControl {
   external factory GeolocateControl();
 
-  external core.dynamic Function(core.dynamic map) onAdd;
+  external dynamic Function(dynamic map) onAdd;
   external void Function() onRemove;
-  external core.bool Function() trigger;
+  external bool Function() trigger;
 }
 
-extension MapToJSObject on core.Map<core.dynamic, core.dynamic> {
-  core.dynamic mapToJsObject() => throw core.UnimplementedError();
+extension MapToJSObject on Map<dynamic, dynamic> {
+  dynamic mapToJsObject() => throw UnimplementedError();
 }
 
-core.Object? myDartify(core.dynamic obj) => throw core.UnimplementedError();
+Object? myDartify(dynamic obj) => throw UnimplementedError();

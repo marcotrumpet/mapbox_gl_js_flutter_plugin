@@ -1,7 +1,6 @@
 @JS()
 library mapboxgl;
 
-import 'dart:core' as core;
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js';
 // ignore: avoid_web_libraries_in_flutter
@@ -11,43 +10,43 @@ import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 
 @JS('JSON.stringify')
-external core.String stringify(core.dynamic obj);
+external String stringify(dynamic obj);
 
 @JS('console.log')
-external void consoleLog(core.dynamic obj);
+external void consoleLog(dynamic obj);
 
 @JS('mapboxgl')
-external Map get map;
+external MapboxJS get map;
 
 @JS('mapboxgl.Map')
-class Map {
-  external Map(options);
+class MapboxJS {
+  external MapboxJS(options);
 
   @JS()
-  external void addSource(core.String id, core.dynamic options);
+  external void addSource(String id, dynamic options);
 
   @JS()
-  external core.dynamic getSource(core.String id);
+  external dynamic getSource(String id);
 
   @JS()
-  external core.dynamic removeSource(core.String id);
+  external dynamic removeSource(String id);
 
   @JS()
   external void addLayer(JsObject layer);
 
   @JS()
-  external core.dynamic getLayer(core.String id);
+  external dynamic getLayer(String id);
 
   @JS()
-  external void moveLayer(core.String layerId);
+  external void moveLayer(String layerId);
 
   @JS()
-  external void removeLayer(core.String layerId);
+  external void removeLayer(String layerId);
 
   @JS()
-  external core.dynamic on(
-    core.String method,
-    core.dynamic Function(core.dynamic) callback,
+  external dynamic on(
+    String method,
+    dynamic Function(dynamic) callback,
   );
 
   @JS()
@@ -57,33 +56,33 @@ class Map {
   external void triggerRepaint();
 
   @JS()
-  external void setCenter(core.List<core.num> coords);
+  external void setCenter(List<num> coords);
 
   @JS()
-  external core.bool loaded();
+  external bool loaded();
 
   @JS()
   external void setLayoutProperty(
-    core.String layerId,
-    core.String property,
-    core.dynamic value,
+    String layerId,
+    String property,
+    dynamic value,
   );
 
   @JS()
-  external core.dynamic getPaintProperty(
-    core.String layerId,
-    core.String property,
+  external dynamic getPaintProperty(
+    String layerId,
+    String property,
   );
 
   @JS()
-  external void zoomTo(core.num zoom);
+  external void zoomTo(num zoom);
 
   @JS()
-  external core.num getZoom();
+  external num getZoom();
 
   @JS()
-  external core.dynamic queryRenderedFeatures(
-    core.List<core.num> coords,
+  external dynamic queryRenderedFeatures(
+    List<num> coords,
   );
 
   @JS()
@@ -94,7 +93,7 @@ class Map {
 
   @JS()
   external JsObject cameraForBounds(
-    core.List<core.List<core.num>> bbox,
+    List<List<num>> bbox,
     JsObject options,
   );
 
@@ -106,12 +105,12 @@ class Map {
 @anonymous
 class MapOptions {
   external factory MapOptions({
-    core.String container,
-    core.String accessToken,
-    core.List<core.num> center,
-    core.num zoom,
-    core.String style,
-    core.String language,
+    String container,
+    String accessToken,
+    List<num> center,
+    num zoom,
+    String style,
+    String language,
   });
 }
 
@@ -120,20 +119,20 @@ class GeolocateControl {
   external factory GeolocateControl();
 
   @JS()
-  external core.dynamic Function(core.dynamic map) onAdd;
+  external dynamic Function(dynamic map) onAdd;
 
   @JS()
   external void Function() onRemove;
 
   @JS()
-  external core.bool Function() trigger;
+  external bool Function() trigger;
 }
 
-extension MapToJSObject on core.Map<core.dynamic, core.dynamic> {
+extension MapToJSObject on Map<dynamic, dynamic> {
   JsObject mapToJsObject() {
     final object = js_util.newObject<JsObject>();
     forEach((k, v) {
-      if (v is core.Map<core.dynamic, core.dynamic>) {
+      if (v is Map<dynamic, dynamic>) {
         js_util.setProperty(object, k.toString(), v.mapToJsObject());
       } else {
         js_util.setProperty(object, k.toString(), v);
@@ -143,6 +142,6 @@ extension MapToJSObject on core.Map<core.dynamic, core.dynamic> {
   }
 }
 
-core.Object? myDartify(core.dynamic obj) {
+Object? myDartify(dynamic obj) {
   return dartify(obj);
 }
