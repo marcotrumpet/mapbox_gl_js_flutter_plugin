@@ -1,10 +1,7 @@
 @JS()
 library mapboxgl;
 
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:js';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:js_util' as js_util;
+import 'dart:js_interop';
 
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
@@ -32,7 +29,7 @@ class MapboxJS {
   external dynamic removeSource(String id);
 
   @JS()
-  external void addLayer(JsObject layer);
+  external void addLayer(dynamic layer);
 
   @JS()
   external dynamic getLayer(String id);
@@ -50,7 +47,7 @@ class MapboxJS {
   );
 
   @JS()
-  external JsObject setData(JsObject options);
+  external JSObject setData(JSObject options);
 
   @JS()
   external void triggerRepaint();
@@ -84,20 +81,20 @@ class MapboxJS {
   external num getZoom();
 
   @JS()
-  external dynamic queryRenderedFeatures(
+  external JSObject queryRenderedFeatures(
     List<num> coords,
   );
 
   @JS()
-  external void easeTo(JsObject options);
+  external void easeTo(JSObject options);
 
   @JS()
-  external void flyTo(JsObject options);
+  external void flyTo(JSObject options);
 
   @JS()
-  external JsObject cameraForBounds(
+  external JSObject cameraForBounds(
     List<List<num>> bbox,
-    JsObject options,
+    JSObject options,
   );
 
   @JS()
@@ -107,11 +104,13 @@ class MapboxJS {
 @JS()
 @anonymous
 class LngLatBounds {
-  @JS()
-  external dynamic getNorthEast();
+  external factory LngLatBounds();
 
   @JS()
-  external dynamic getSouthWest();
+  external JSObject getNorthEast();
+
+  @JS()
+  external JSObject getSouthWest();
 }
 
 @JS()
@@ -142,19 +141,59 @@ class GeolocateControl {
 }
 
 extension MapToJSObject on Map<dynamic, dynamic> {
-  JsObject mapToJsObject() {
-    final object = js_util.newObject<JsObject>();
+  JSObject mapToJsObject() {
+    final object = newObject<JSObject>();
     forEach((k, v) {
       if (v is Map<dynamic, dynamic>) {
-        js_util.setProperty(object, k.toString(), v.mapToJsObject());
+        setProperty(object, k.toString(), v.mapToJsObject());
       } else {
-        js_util.setProperty(object, k.toString(), v);
+        setProperty(object, k.toString(), v);
       }
     });
     return object;
   }
 }
 
-Object? myDartify(dynamic obj) {
-  return dartify(obj);
+Object? myDartify(Object? o) => dartify(o);
+
+dynamic myJsfy(Object? obj) {
+  return jsify(obj);
 }
+
+extension JsProperty on dynamic {
+  dynamic getMyProperty(String property) {
+    if (this is! JSObject) return;
+    return getProperty<dynamic>(this as JSObject, property);
+  }
+}
+
+Map<dynamic, dynamic> jsObjectToMap(JSObject jsObject) {
+  final result = <dynamic, dynamic>{};
+  final keys = _objectKeys(jsObject);
+  for (final key in keys) {
+    if (!key.startsWith('_') && key != 'originalEvent' && key != 'target') {
+      final dynamic value = getProperty<dynamic>(jsObject, key);
+      final nestedKeys = objectKeys(value);
+      if ((nestedKeys ?? []).isNotEmpty) {
+        //nested property
+        result[key] = jsObjectToMap(value as JSObject);
+      } else {
+        result[key] = value;
+      }
+    }
+  }
+  return result;
+}
+
+List<String>? objectKeys(dynamic jsObject) {
+  if (jsObject == null ||
+      jsObject is String ||
+      jsObject is num ||
+      jsObject is bool) {
+    return null;
+  }
+  return _objectKeys(jsObject);
+}
+
+@JS('Object.keys')
+external List<String> _objectKeys(dynamic jsObject);

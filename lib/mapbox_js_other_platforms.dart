@@ -63,6 +63,8 @@ class MapboxJS {
 }
 
 class LngLatBounds {
+  external factory LngLatBounds();
+
   external dynamic getNorthEast();
   external dynamic getSouthWest();
 }
@@ -90,4 +92,19 @@ extension MapToJSObject on Map<dynamic, dynamic> {
   dynamic mapToJsObject() => throw UnimplementedError();
 }
 
-Object? myDartify(dynamic obj) => throw UnimplementedError();
+dynamic myDartify(dynamic obj) => throw UnimplementedError();
+dynamic myJsfy(Object? obj) => throw UnimplementedError();
+
+extension JsProperty on dynamic {
+  dynamic getMyProperty(String property) {
+    return throw UnimplementedError();
+  }
+}
+
+Map<dynamic, dynamic> jsObjectToMap(dynamic jsObject) =>
+    throw UnimplementedError();
+
+List<String>? objectKeys(dynamic jsObject) => throw UnimplementedError();
+
+// ignore: unused_element
+external List<String> _objectKeys(dynamic jsObject);
