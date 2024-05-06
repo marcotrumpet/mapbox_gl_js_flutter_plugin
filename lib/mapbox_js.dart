@@ -99,6 +99,15 @@ class MapboxJS {
 
   @JS()
   external void addControl(GeolocateControl conrtol);
+
+  @JS()
+  external void addImage(String name, dynamic imageData);
+
+  @JS()
+  external void loadImage(
+    String url,
+    dynamic Function(dynamic, dynamic) callback,
+  );
 }
 
 @JS()
@@ -138,6 +147,17 @@ class GeolocateControl {
 
   @JS()
   external bool Function() trigger;
+}
+
+@JS('mapboxgl.Marker')
+class MarkerGLJS {
+  external factory MarkerGLJS(dynamic el);
+
+  @JS()
+  external dynamic Function(dynamic coordinates) setLngLat;
+
+  @JS()
+  external dynamic Function(dynamic map) addTo;
 }
 
 extension MapToJSObject on Map<dynamic, dynamic> {

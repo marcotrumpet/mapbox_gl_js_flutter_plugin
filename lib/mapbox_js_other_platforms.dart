@@ -60,6 +60,13 @@ class MapboxJS {
   );
 
   external void addControl(GeolocateControl conrtol);
+
+  external void addImage(String name, dynamic imageData);
+
+  external void loadImage(
+    String url,
+    dynamic Function(dynamic, dynamic) callback,
+  );
 }
 
 class LngLatBounds {
@@ -86,6 +93,14 @@ class GeolocateControl {
   external dynamic Function(dynamic map) onAdd;
   external void Function() onRemove;
   external bool Function() trigger;
+}
+
+class MarkerGLJS {
+  external factory MarkerGLJS(dynamic el);
+
+  external dynamic Function(dynamic coordinates) setLngLat;
+
+  external dynamic Function(dynamic map) addTo;
 }
 
 extension MapToJSObject on Map<dynamic, dynamic> {
